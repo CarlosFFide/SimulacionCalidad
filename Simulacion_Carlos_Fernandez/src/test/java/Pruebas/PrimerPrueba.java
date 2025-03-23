@@ -1,3 +1,5 @@
+//Autor Carlos Fernandez Herrera
+
 package Pruebas;
 
 import static org.junit.Assert.assertEquals;
@@ -32,7 +34,7 @@ public class PrimerPrueba {
 	}
 
 	public void InicioDeSesion() {
-		//metodo reutilizable para iniciar sesion - Este tambien es el Test#1
+		// metodo reutilizable para iniciar sesion - Este tambien es el Test#1
 		WebElement txtuser = driver.findElement(By.id("user-name"));
 		WebElement txtpassword = driver.findElement(By.id("password"));
 		WebElement btnLogin = driver.findElement(By.id("login-button"));
@@ -51,7 +53,8 @@ public class PrimerPrueba {
 
 	public void PrimerTest() {
 
-		// Test para inicion de sesion correcto con usuario/pass provisto
+		// Test 1 para inicio de sesion correcto con usuario/pass provistos
+		
 
 		InicioDeSesion();
 
@@ -59,7 +62,7 @@ public class PrimerPrueba {
 		// en la ventana principal post-login, utilizando el metodo de inicio de sesion
 		// previamente declarado para reutilizar en pruebas posteriores
 
-		WebElement lbProducts = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[1]/div[3]/div"));
+		WebElement lbProducts = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[1]/div[3]/div")); 
 
 		String txtProducts = lbProducts.getText();
 
@@ -69,10 +72,13 @@ public class PrimerPrueba {
 	@Test
 
 	public void SegundaPrueba() {
-		//Prueba para comprobar que el numero de items en el carrito se refleje de forma correcta dependiendo de la cantidad de items agregados en el boton de carrito en el menu principal
+		// Prueba 2 para comprobar que el numero de items en el carrito se refleje de
+		// forma correcta dependiendo de la cantidad de items agregados en el boton de
+		// carrito en el menu principal
 		InicioDeSesion();
 
-		WebElement btnBackPack = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/button"));
+		WebElement btnBackPack = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/button"));
 
 		btnBackPack.click();
 
@@ -86,125 +92,135 @@ public class PrimerPrueba {
 	@Test
 
 	public void TercerPrueba() {
-		
-		//Prueba para comprobar que el boton de carrito lleva a la pagina del carrito con los items seleccionados y que dichos items sean iguales a los seleccionados en la pagina principal
+
+		// Prueba 3 para comprobar que el boton de carrito lleva a la pagina del carrito
+		// con los items seleccionados y que dichos items sean iguales a los
+		// seleccionados en la pagina principal
 
 		InicioDeSesion();
-		
-		
-		WebElement lbBackPack = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/a/div"));
-		WebElement btnBackPack = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/button"));
+
+		WebElement lbBackPack = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/a/div"));
+		WebElement btnBackPack = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/button"));
 		WebElement btnCarrito = driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]"));
 		String txtBackpack = lbBackPack.getText();
 
 		btnBackPack.click();
 		btnCarrito.click();
-		
-		
+
 		WebElement lbYourCart = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]"));
-		
+
 		String txtYourCart = lbYourCart.getText();
-		
-		
+
 		assertEquals("Banner Your Cart", "Your Cart", txtYourCart);
 		assertEquals("Label Backpack", "Sauce Labs Backpack", txtBackpack);
-		
-		
+
 	}
-	
-	
+
 	@Test
 	public void CuartaPrueba() {
-		//Prueba para comparar que el precio del item Backpack sea igual en su descripcion al que se muestra en el menu principal
+		// Prueba 4 para comparar que el precio del item Backpack sea igual en su
+		// descripcion al que se muestra en el menu principal
 		InicioDeSesion();
-		
-		
+
 		WebElement btnBackPackInfo = driver.findElement(By.id("item_4_title_link"));
-		WebElement txtPriceBackpackMenu = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/div"));
+		WebElement txtPriceBackpackMenu = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/div"));
 		String txtBackpackPriceMenu = txtPriceBackpackMenu.getText();
 		btnBackPackInfo.click();
-		
-		WebElement txtPriceBackpackDetail = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div/div/div[3]"));
+
+		WebElement txtPriceBackpackDetail = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div/div/div[3]"));
 		String txtBackPackPriceDetail = txtPriceBackpackDetail.getText();
-		
+
 		assertEquals("Precio en detalles no coincide con el del menú", txtBackpackPriceMenu, txtBackPackPriceDetail);
 
 	}
 
-
-	
 	@Test
 	public void QuintaPrueba() {
-		
-		//prueba para simular una compra completa desde poner el producto en el carrito, aceptar, poner los datos de nombre, apellido y postal; por ultimo finalizar la compra
-		
+
+		// prueba 5 para simular una compra completa desde poner el producto en el
+		// carrito, aceptar, poner los datos de nombre, apellido y postal; por ultimo
+		// finalizar la compra
+
 		InicioDeSesion();
-		
-		WebElement lbBackPack = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/a/div"));
-		WebElement btnBackPack = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/button"));
+
+		WebElement lbBackPack = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/a/div"));
+		WebElement btnBackPack = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/button"));
 		WebElement btnCarrito = driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]"));
 		String txtBackpack = lbBackPack.getText();
 
 		btnBackPack.click();
 		btnCarrito.click();
-		
+
 		WebElement btnCheckout = driver.findElement(By.xpath("/html/body/div/div[2]/div[3]/div/div[2]/a[2]"));
 		btnCheckout.click();
-		
+
 		WebElement txtnombre = driver.findElement(By.id("first-name"));
 		WebElement txtapellido = driver.findElement(By.id("last-name"));
 		WebElement txtpostal = driver.findElement(By.id("postal-code"));
-		
+
 		txtnombre.sendKeys("Usuario");
 		txtapellido.sendKeys("Prueba");
 		txtpostal.sendKeys("12345");
-		
+
 		WebElement btnContinue = driver.findElement(By.xpath("/html/body/div/div[2]/div[3]/div/form/div[2]/input"));
 		btnContinue.click();
-		
+
 		WebElement btnFinish = driver.findElement(By.xpath("/html/body/div/div[2]/div[3]/div/div[2]/div[8]/a[2]"));
 		btnFinish.click();
-		
+
 		WebElement txtFinishPage = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]"));
 		String txtFinish = txtFinishPage.getText();
-		
+
 		assertEquals("Banner Finish Compra", "Finish", txtFinish);
 	}
-	
+
 	@Test
-	
+
 	public void SextaPrueba() {
-		//Prueba para comprobar que la descripcion de la Jacket sea igual en el menu que en la pagina de detalles del producto
+		// Prueba 6 para comprobar que la descripcion de la Jacket sea igual en el menu
+		// que en la pagina de detalles del producto
 		InicioDeSesion();
-		
-		WebElement txtdescripcionJacketMenu = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[4]/div[2]/div"));
-		WebElement btnJacket = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[4]/div[2]/a"));
-		
+
+		WebElement txtdescripcionJacketMenu = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[4]/div[2]/div"));
+		WebElement btnJacket = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[4]/div[2]/a"));
+
 		String txtJacketdescripcionMenu = txtdescripcionJacketMenu.getText();
-		
+
 		btnJacket.click();
-		
-		WebElement txtdescripcionJacketDetail = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div/div/div[2]"));
+
+		WebElement txtdescripcionJacketDetail = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div/div/div[2]"));
 		String txtJacketDetailDescripcion = txtdescripcionJacketDetail.getText();
-		
-		assertEquals("Descripción en detalles no coincide con el menú", txtJacketdescripcionMenu, txtJacketDetailDescripcion);
+
+		assertEquals("Descripción en detalles no coincide con el menú", txtJacketdescripcionMenu,
+				txtJacketDetailDescripcion);
 
 	}
-	
+
 	@Test
-	
+
 	public void SeptimaPrueba() {
-		
-		//Prueba confirma la funcionalidad de ir a la pagina de detalles de producto "Onesie" y que el boton de Back redirija a la pagina principal
-		
+
+		// Prueba 7 confirma la funcionalidad de ir a la pagina de detalles de producto
+		// "Onesie" y que el boton de Back redirija a la pagina principal
+
 		InicioDeSesion();
-		
-		WebElement btnOnesie = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[5]/div[2]/a"));
+
+		WebElement btnOnesie = driver
+				.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[2]/div/div[5]/div[2]/a"));
 		btnOnesie.click();
-		
+
 		WebElement btnBack = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/button"));
 		btnBack.click();
-		
+
 		WebElement lbProducts = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[1]/div[3]/div"));
 
 		String txtProducts = lbProducts.getText();
