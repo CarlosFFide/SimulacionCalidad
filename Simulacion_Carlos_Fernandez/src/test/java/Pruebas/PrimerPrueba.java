@@ -51,7 +51,7 @@ public class PrimerPrueba {
 
 	@Test
 
-	public void PrimerTest() {
+	public void PrimeraPrueba() {
 
 		// Test 1 para inicio de sesion correcto con usuario/pass provistos
 		
